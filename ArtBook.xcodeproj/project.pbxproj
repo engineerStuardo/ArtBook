@@ -14,6 +14,7 @@
 		B4DB8E5F29D0834000E6625B /* ArtBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4DB8E5D29D0834000E6625B /* ArtBook.xcdatamodeld */; };
 		B4DB8E6129D0834200E6625B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4DB8E6029D0834200E6625B /* Assets.xcassets */; };
 		B4DB8E6429D0834200E6625B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4DB8E6229D0834200E6625B /* LaunchScreen.storyboard */; };
+		B4DB8E6C29D087FF00E6625B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DB8E6B29D087FF00E6625B /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		B4DB8E6029D0834200E6625B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4DB8E6329D0834200E6625B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4DB8E6529D0834200E6625B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4DB8E6B29D087FF00E6625B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				B4DB8E5429D0834000E6625B /* AppDelegate.swift */,
 				B4DB8E5629D0834000E6625B /* SceneDelegate.swift */,
 				B4DB8E5829D0834000E6625B /* ViewController.swift */,
+				B4DB8E6B29D087FF00E6625B /* DetailsViewController.swift */,
 				B4DB8E5A29D0834000E6625B /* Main.storyboard */,
 				B4DB8E6029D0834200E6625B /* Assets.xcassets */,
 				B4DB8E6229D0834200E6625B /* LaunchScreen.storyboard */,
@@ -145,6 +148,7 @@
 				B4DB8E5529D0834000E6625B /* AppDelegate.swift in Sources */,
 				B4DB8E5F29D0834000E6625B /* ArtBook.xcdatamodeld in Sources */,
 				B4DB8E5729D0834000E6625B /* SceneDelegate.swift in Sources */,
+				B4DB8E6C29D087FF00E6625B /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
