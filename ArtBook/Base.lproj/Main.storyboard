@@ -105,7 +105,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="i49-Cf-51t"/>
                     <connections>
-                        <outlet property="artistText" destination="EMU-qN-xH6" id="aLz-02-cSN"/>
+                        <outlet property="artistText" destination="d0e-5w-pru" id="3Yp-4y-QUL"/>
                         <outlet property="imageView" destination="byr-ds-exW" id="Vkv-0i-4Xj"/>
                         <outlet property="nameText" destination="b8y-G2-eOc" id="uta-Bd-5lN"/>
                         <outlet property="yearText" destination="EMU-qN-xH6" id="kil-o4-V9o"/>

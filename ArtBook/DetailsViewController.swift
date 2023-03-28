@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -44,6 +45,34 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func save(_ sender: Any) {
-        print("test")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let newPaiting = NSEntityDescription.insertNewObject(forEntityName: "Painting", into: context)
+        
+        newPaiting.setValue(nameText.text, forKey: "name")
+        newPaiting.setValue(artistText.text, forKey: "artist")
+        if let year = Int(yearText.text!) {
+            newPaiting.setValue(year, forKey: "year")
+        }
+        newPaiting.setValue(UUID(), forKey: "id")
+        let imageData = imageView.image?.jpegData(compressionQuality: 0.5)
+        newPaiting.setValue(imageData, forKey: "image")
+        
+        do {
+            try context.save()
+            let alert = UIAlertController(title: "Congratulation", message: "Paiting successfuly saved!!", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "Ok", style: .default) { _ in
+                self.nameText.text = ""
+                self.artistText.text = ""
+                self.yearText.text = ""
+                self.imageView.image = UIImage(named: "select")
+                self.nameText.becomeFirstResponder()
+            }
+            alert.addAction(okButton)
+            self.present(alert, animated: true)
+            print("Success")
+        } catch {
+            print("Error")
+        }
     }
 }
