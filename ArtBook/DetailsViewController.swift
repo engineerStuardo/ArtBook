@@ -62,11 +62,8 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             try context.save()
             let alert = UIAlertController(title: "Congratulation", message: "Paiting successfuly saved!!", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "Ok", style: .default) { _ in
-                self.nameText.text = ""
-                self.artistText.text = ""
-                self.yearText.text = ""
-                self.imageView.image = UIImage(named: "select")
-                self.nameText.becomeFirstResponder()
+                NotificationCenter.default.post(name: NSNotification.Name("newData"), object: nil)
+                self.navigationController?.popViewController(animated: true)
             }
             alert.addAction(okButton)
             self.present(alert, animated: true)

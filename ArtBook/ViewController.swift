@@ -27,7 +27,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         getData()
     }
     
-    func getData() {
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name("newData"), object: nil)
+    }
+    
+    @objc func getData() {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         let context = appDelegate?.persistentContainer.viewContext
         
@@ -36,6 +40,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         do{
             let results = try context?.fetch(fetchRequest)
+            
+            nameArray.removeAll(keepingCapacity: false)
+            idArray.removeAll(keepingCapacity: false)
             
             for result in results as! [NSManagedObject]{
                 if let name = result.value(forKey: "name") as? String {
