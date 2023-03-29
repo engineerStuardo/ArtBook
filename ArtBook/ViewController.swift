@@ -96,5 +96,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             destinationVC.chosenPaitingId = selectedPaitingId
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let idString = idArray[indexPath.row].uuidString
+            
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            let context = delegate.persistentContainer.viewContext
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Painting")
+            fetchRequest.returnsObjectsAsFaults = false
+            fetchRequest.predicate = NSPredicate(format: "id= %@", idString)
+            
+            do {
+                let results = try context.fetch(fetchRequest)
+                
+                if results.count > 0 {
+                    for result in results as! [NSManagedObject] {
+                        if result.value(forKey: "id") as! UUID == idArray[indexPath.row] {
+                            context.delete(result)
+                            nameArray.remove(at: indexPath.row)
+                            idArray.remove(at: indexPath.row)
+                            tableView.reloadData()
+                            
+                            do {
+                                try context.save()
+                            } catch {
+                                print("Error")
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Error")
+            }
+        }
+    }
 }
 
