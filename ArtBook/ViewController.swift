@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var nameArray = [String]()
     var idArray = [UUID]()
+    var selectedPaiting = ""
+    var selectedPaitingId: UUID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,21 +41,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         fetchRequest.returnsObjectsAsFaults = false
         
         do{
-            let results = try context?.fetch(fetchRequest)
+            let results = try context!.fetch(fetchRequest)
             
-            nameArray.removeAll(keepingCapacity: false)
-            idArray.removeAll(keepingCapacity: false)
-            
-            for result in results as! [NSManagedObject]{
-                if let name = result.value(forKey: "name") as? String {
-                    self.nameArray.append(name)
-                }
+            if results.count > 0 {
+                nameArray.removeAll(keepingCapacity: false)
+                idArray.removeAll(keepingCapacity: false)
                 
-                if let id = result.value(forKey: "id") as? UUID {
-                    self.idArray.append(id)
+                for result in results as! [NSManagedObject]{
+                    if let name = result.value(forKey: "name") as? String {
+                        self.nameArray.append(name)
+                    }
+                    
+                    if let id = result.value(forKey: "id") as? UUID {
+                        self.idArray.append(id)
+                    }
+                    
+                    self.tableView.reloadData()
                 }
-                
-                self.tableView.reloadData()
             }
         } catch {
             print("Error fetching data")
@@ -61,6 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func addFunction() {
+        selectedPaiting = ""
         performSegue(withIdentifier: "toDetailsVC", sender: nil)
     }
 
@@ -76,6 +81,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.contentConfiguration = content
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPaiting = nameArray[indexPath.row]
+        selectedPaitingId = idArray[indexPath.row]
+        performSegue(withIdentifier: "toDetailsVC", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailsVC" {
+            let destinationVC = segue.destination as! DetailsViewController
+            destinationVC.chosenPaiting = selectedPaiting
+            destinationVC.chosenPaitingId = selectedPaitingId
+        }
     }
 }
 
